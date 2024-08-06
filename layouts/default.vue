@@ -4,7 +4,7 @@
     <slot />
     <ul>
       <li>
-        <NuxtLink to="/about">about</NuxtLink>
+        <NuxtLink to="/preview">preview</NuxtLink>
       </li>
       <li>
         <NuxtLink to="/">index</NuxtLink>
