@@ -8,9 +8,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { drawPinImage } from '~/utils/image'
+import { drawPinImage, DEFAULT_SIZE } from '~/utils/image'
 import { ref } from 'vue';
 const canvas = ref<HTMLCanvasElement | null>()
+
+const SPACE = 10
 
 const fetchImages = async () => {
   const { data } = await useFetch('/api/fetchImages', {
@@ -21,9 +23,18 @@ const fetchImages = async () => {
     }
   })
   const list = data.value?.images || []
+  console.log('list', list)
   const ctx = canvas.value?.getContext('2d') as CanvasRenderingContext2D
-  drawPinImage({ ctx, src: list[0].data, x: 10, y: 10 }).then(res => {
-    console.log('get data', res)
+  let index = 0
+  list.forEach((item) => {
+    index += DEFAULT_SIZE + SPACE
+    const x = index
+    const y = 10
+    drawPinImage({ ctx, src: item.data, x, y }).then(res => {
+      // 每张图独立处理结果
+      console.log('get data', res)
+    })
   })
+  
 }
 </script>

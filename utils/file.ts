@@ -2,19 +2,22 @@ import fs from 'fs'
 
 export function isFileExit(filePath: string) {
   try {
-    fs.statSync(filePath)
-    return true
-  } catch {
-    return false
-  }
+    const stat = fs.statSync(filePath)
+    return stat
+  } catch {}
 }
 
 export function getFileSync(filePath: string) {
-  if (isFileExit(filePath)) {
+  const stat = isFileExit(filePath)
+  if (stat?.size) {
     const data = fs.readFileSync(filePath)
-    return data
+    return {
+      buffer: data,
+      size: stat.size,
+      path: filePath
+    }
   } else {
-    return ''
+    return {}
   }
 }
 

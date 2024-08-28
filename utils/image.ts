@@ -11,7 +11,9 @@ export function loadNewImage (src: string): Promise<HTMLImageElement> {
   })
 }
 
-const DEFAULT_SIZE = 6
+// 默认phash算法为8*8维度
+export const DEFAULT_SIZE = 6
+
 type DrawPinImage = {
   ctx: CanvasRenderingContext2D,
   src: string,

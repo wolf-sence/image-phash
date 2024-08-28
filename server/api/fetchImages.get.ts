@@ -38,11 +38,13 @@ function getImages(filePath: string, page: number, pageSize: number = 10): Image
   const pagePaths = allImagesPath.slice((page - 1) * pageSize, page * pageSize)
 
   const imageList = pagePaths.map((p) => {
-    const imageBuffer = getFileSync(p)
+    const { buffer = '', size } = getFileSync(p)
     const ext = path.extname(p).slice(1)
     const base64Prefix = `data:image/${ext};base64,`
     return {
-      data: base64Prefix + imageBuffer.toString('base64'),
+      data: base64Prefix + buffer.toString('base64'),
+      size,
+      path: p,
       ext
     }
   })
