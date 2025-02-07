@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --"
+    "build": "vite build"
   },
   "dependencies": {
     "@types/lodash-es": "^4.17.12",
